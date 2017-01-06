@@ -41,9 +41,9 @@ struct CORE_BMPFileHeader
 //-----------------------------------------------------------------------------
 // Utility functions
 template<typename T>
-inline T ReadWord(const T *a)	{ return (a[0] + a[1]*0x100); }
+inline word ReadWord(const T a[])	{ return (a[0] + a[1]*0x100); }
 template<typename T>
-inline T ReadDWord(const T *a) { return (a[0] + a[1] * 0x100 + a[2] * 0x10000 + a[3] * 0x1000000); }
+inline dword ReadDWord(const T a[]) { return (a[0] + a[1] * 0x100 + a[2] * 0x10000 + a[3] * 0x1000000); }
 
 // Next higher power of 2
 dword hp2(dword v)
