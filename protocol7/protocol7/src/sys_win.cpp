@@ -1,5 +1,5 @@
 /*
- * sys_win.cpp - SYS function implementation for a Windows platform
+ * sys_win.cpp - SYS function implementation for Windows platform
  */
 #include "stdafx.h"
 #include "base.h"

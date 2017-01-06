@@ -10,14 +10,20 @@
 //	Resolution (Real + Virtual)
 
 //	Portrait 2:3 aspect ratio
-const size_t SYS_WIDTH	= 512;
-const size_t SYS_HEIGHT = 768;
+enum
+{
+	SYS_WIDTH = 512,
+	SYS_HEIGHT = 768
+};
 const bool	 SYS_FULLSCREEN = false;
 
 //	Game window co-ordinate system: width = 1000 px, height = 1500 px
 //	Origin is bottom left corner of the window.
-const size_t G_WIDTH  = 1000;
-const size_t G_HEIGHT = 1500;
+enum
+{
+	G_WIDTH = 1000,
+	G_HEIGHT = 1500
+};
 #pragma endregion
 
 #pragma region Platform
