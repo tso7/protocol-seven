@@ -308,6 +308,8 @@ void RunGame()
 			{
 				if (vlen2(vsub(g_entities[i].pos, MAIN_SHIP->pos)) < CORE_FSquare(g_entities[i].radius + MAIN_SHIP->radius))
 				{
+					vec2 sub = vsub(g_entities[i].pos, MAIN_SHIP->pos);
+					float Len = vlen2(vsub(g_entities[i].pos, MAIN_SHIP->pos));
 					MAIN_SHIP->energy = SafeSub(MAIN_SHIP->energy, CRASH_ENERGY_LOSS);
 					MAIN_SHIP->vel.y = SHIP_START_SPEED;
 					g_entities[i].vel = vscale(vunit(vsub(g_entities[i].pos, MAIN_SHIP->pos)), CRASH_VEL);
