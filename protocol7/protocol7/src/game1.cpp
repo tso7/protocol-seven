@@ -8,8 +8,8 @@
 
 namespace Game1
 {
-	static const size_t SHIP_W = 250;
-	static const size_t SHIP_H = 270;
+	static const float SHIP_W = 250;
+	static const float SHIP_H = 270;
 
 	int g_ship_LL, g_ship_L, g_ship_C, g_ship_R, g_ship_RR;
 	int g_bkg;

@@ -23,6 +23,7 @@
     <ClCompile Include="src\game0.cpp" />
     <ClCompile Include="src\game1.cpp" />
     <ClCompile Include="src\game2.cpp" />
+    <ClCompile Include="src\game3.cpp" />
     <ClCompile Include="src\stdafx.cpp" />
     <ClCompile Include="src\sys_win.cpp" />
   </ItemGroup>
