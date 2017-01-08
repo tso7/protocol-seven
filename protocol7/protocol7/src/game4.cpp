@@ -1,26 +1,27 @@
 /*
- * game3.cpp - Added gameplay features:
- *				- Collision between obstacles
- *				- UI elements
- *				- Shadows
- *				- Success / fail state
- */
+* game4.cpp - Added more gameplay features:
+*				- Algorithmic rock generation
+*/
 #include "stdafx.h"
 #include "base.h"
 #include "sys.h"
 #include "core.h"
 
-namespace Game3
+namespace Game4
 {
+	//=============================================================================
+	// Logger
+	inline void LOG(char *msg) { printf(msg); } // Comment to disable logging
+
 	//=============================================================================
 	// Safe substractions
 	template <typename T>
 	inline T SafeSub(const T& a, const T& b) { return (a - b > 0 ? a - b : 0); }
 
 	//=============================================================================
-   // Game Parameter Constants
+	// Game Parameter Constants
 
-   // Sprites
+	// Sprites
 	static const float SPRITE_SCALE = 8.f;
 	static const float SHADOW_OFFSET = 80.f;
 	static const float SHADOW_SCALE = 0.9f;
@@ -63,7 +64,7 @@ namespace Game3
 	static const float START_ROCK_CHANCE_PER_PIXEL = 1.f / 1000.f;
 	static const float EXTRA_ROCK_CHANCE_PER_PIXEL = 0.f;	//1.f/2500000.f;
 
-	// Game state
+															// Game state
 	static const float RACE_END = 100000.f;
 	static const float FPS = 60.f;
 	static const float FRAMETIME = (1.f / FPS);
@@ -72,9 +73,11 @@ namespace Game3
 	static const float DYING_TIME = 2.f;
 	static const float VICTORY_TIME = 8.f;
 
+	static const float FIRST_CHALLENGE = 3000.f;
+
 	float volatile g_current_race_pos = 0.f;
 	float volatile g_camera_offset = 0.f;
-	float volatile g_rock_chance = START_ROCK_CHANCE_PER_PIXEL;
+	float g_rock_chance = START_ROCK_CHANCE_PER_PIXEL;
 
 	//=============================================================================
 	// Game state
@@ -258,6 +261,46 @@ namespace Game3
 
 		// Initialize main ship
 		InsertEntity(E_MAIN, vmake(G_WIDTH / 2.0, G_HEIGHT / 8.f), vmake(0.f, SHIP_START_SPEED), MAINSHIP_RADIUS, g_ship_C, true);
+	}
+
+	//-----------------------------------------------------------------------------
+	// Level generation, called from RunGame() every frame
+	float g_next_challenge_area = FIRST_CHALLENGE;
+
+	void GenNextElements()
+	{
+		// Called every game loop, but only does work when we are close to the next "challenge area"
+		if (g_current_race_pos + 2 * G_HEIGHT > g_next_challenge_area)
+		{
+			float current_y = g_next_challenge_area;
+			LOG("\"Current: %f\n\", g_next_challenge_area");
+
+			// Choose how many layers of rocks
+			int nlayers = (int)CORE_URand(1, 3);
+			LOG("\" nlayers: %d\n\", nlayers");
+			for (size_t i = 0; i < nlayers; i++)
+			{
+				LOG("\"  where: %f\n\", current_y");
+
+				// Choose how many rocks
+				int nrocks = (int)CORE_URand(1, 2);
+				LOG("\"  nrocks: %d\n\", nrocks");
+
+				// Gen rocks
+				for (size_t i = 0; i < nrocks; i++)
+				{
+					InsertEntity(E_ROCK,
+						vmake(CORE_FRand(0.f, G_WIDTH), current_y),
+						vmake(CORE_FRand(-1.f, +1.f), CORE_FRand(-1.f, +1.f)),
+						ROCK_RADIUS, g_rock[1/*CORE_URand(0,4)*/], true);
+				}
+
+				current_y += CORE_FRand(300.f, 600.f);
+			}
+
+			g_next_challenge_area = current_y + CORE_FRand(.5f * G_HEIGHT, 1.5f * G_HEIGHT);
+			LOG("\"Next: %f\n\n\", g_next_challenge_area");
+		}
 	}
 
 	//-----------------------------------------------------------------------------
