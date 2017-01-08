@@ -17,7 +17,7 @@ typedef	unsigned		int		uint;
 #pragma region Utility Functions
 // Retreiving size of array
 template<typename T>
-inline T ArraySize (const T& array) { return sizeof (array) / sizeof (array[0]); }
+inline size_t ArraySize (const T& array) { return (sizeof (array) / sizeof (array[0])); }
 
 // Vector structs
 struct ivec2 {int x, y;};	// Integer struct for mouse co-ordinates

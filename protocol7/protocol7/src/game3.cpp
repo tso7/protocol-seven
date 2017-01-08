@@ -130,7 +130,7 @@ namespace Game3
 				g_entities[i].texture = tex;
 				g_entities[i].tex_additive = additive;
 				g_entities[i].has_shadow = has_shadow;
-				g_entities[i].color = vmake(1.f, 1.f, 1.f, 1.f);
+				g_entities[i].color = MakeRGBA(1.f, 1.f, 1.f, 1.f);
 				break;
 			}
 		}
@@ -207,7 +207,7 @@ namespace Game3
 					CORE_RenderCenteredSprite(vadd(vsub(pos, vmake(0.f, g_camera_offset)),
 						vmake(0.f, -SHADOW_OFFSET)), vmake(size.x * SPRITE_SCALE * g_entities[i].tex_scale
 						* SHADOW_SCALE, size.y * SPRITE_SCALE * g_entities[i].tex_scale * SHADOW_SCALE),
-						g_entities[i].texture, vmake(0.f, 0.f, 0.f, 0.4f), g_entities[i].tex_additive);
+						g_entities[i].texture, MakeRGBA(0.f, 0.f, 0.f, 0.4f), g_entities[i].tex_additive);
 
 				// Draw actual entity
 				CORE_RenderCenteredSprite(vsub(pos, vmake(0.f, g_camera_offset)),

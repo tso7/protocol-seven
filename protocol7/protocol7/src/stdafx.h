@@ -43,5 +43,6 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <math.h>
+#include <stdarg.h>
 
 #endif // !P7_STDAFX_H_

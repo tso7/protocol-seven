@@ -17,17 +17,31 @@ inline float	CORE_FSquare(float f) { return f * f; }
 //-----------------------------------------------------------------------------
 // RGBA container
 struct rgba	{ float r, g, b, a; };
-inline rgba vmake(float r, float g, float b, float a) { rgba c; c.r = r; 
+inline rgba MakeRGBA(float r, float g, float b, float a) { rgba c; c.r = r; 
 			c.g = g; c.b = b; c.a = a; return c; }
+inline rgba RGBA(float rr, float gg, float bb, float aa) { return MakeRGBA(rr/255.f,
+			gg/255.f, bb/255.f, aa/255.f);}
 
-static const rgba COLOR_WHITE = vmake(1.f, 1.f, 1.f, 1.f);
+static const rgba COLOR_WHITE = MakeRGBA(1.f, 1.f, 1.f, 1.f);
 
 //-----------------------------------------------------------------------------
 // Bitmap/texture functions
-int		CORE_LoadBmp(const char filename[], const bool &wrap);
-ivec2	CORE_GetBmpSize(const int texture_index);
-void	CORE_UnloadBmp(const int texture_index);
+int		CORE_LoadBmp(const char filename[], bool wrap);
+ivec2	CORE_GetBmpSize(int texture_index);
+GLuint	CORE_GetBmpOpenGLTex(int texture_index);
+void	CORE_UnloadBmp(int texture_index);
 void	CORE_RenderCenteredSprite(vec2 pos, vec2 size, int texture_index, 
 			rgba color = COLOR_WHITE, bool additive = false);
+
+//-----------------------------------------------------------------------------
+// Sound
+bool CORE_InitSound();
+void CORE_EndSound();
+uint CORE_LoadWav(const char filename[]);
+void CORE_UnloadWav(ALuint snd);
+void CORE_PlaySound(ALuint snd, float volume, float pitch);
+void CORE_PlayLoopSound(size_t loop_channel, ALuint snd, float volume, float pitch);
+void CORE_SetLoopSoundParam(size_t loop_channel, float volume, float pitch);
+void CORE_StopLoopSound(size_t loop_channel);
 
 #endif // !P7_CORE_H_
