@@ -27,6 +27,7 @@
     <ClCompile Include="src\game4.cpp" />
     <ClCompile Include="src\game5.cpp" />
     <ClCompile Include="src\game6.cpp" />
+    <ClCompile Include="src\game7.cpp" />
     <ClCompile Include="src\stdafx.cpp" />
     <ClCompile Include="src\sys_win.cpp" />
   </ItemGroup>

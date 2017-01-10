@@ -8,7 +8,7 @@
 //=============================================================================
 // Loading textures (from BMP files)
 
-static const size_t MAX_TEXTURES = 32;
+static const size_t MAX_TEXTURES = 256;
 struct Texture
 {
 	bool used;
